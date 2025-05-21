@@ -2,10 +2,7 @@
     "name": "node-boilerplate",
     "version": "0.0.1",
     "description": "NodeJs tool boilerplate",
-    "main": "./bin/index.js",
-    "bin": {
-        "node-cli": "./bin/index.js"
-    },
+    "main": "./dist/index.js",
     "scripts": {
         "test": "node bin/index.js",
         "start": "webpack --mode=development --watch",
