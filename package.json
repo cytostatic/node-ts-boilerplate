@@ -4,7 +4,7 @@
     "description": "NodeJs tool boilerplate",
     "main": "./dist/index.js",
     "scripts": {
-        "test": "node bin/index.js",
+        "test": "node dist/index.js",
         "start": "webpack --mode=development --watch",
         "build": "webpack --mode=production",
         "deploy": "webpack --mode=production && npm pack"
