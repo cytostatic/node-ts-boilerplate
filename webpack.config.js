@@ -1,42 +1,35 @@
-const path = require('path');
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
-const debug = process.env.NODE_ENV !== "production"; 
+const path = require("path");
+const webpack = require("webpack");
 
-module.exports = {
-    entry: './src/index.ts',
+module.exports = (env, argv) => {
+  const debug = argv.mode === "development";
+  return {
+    entry: "./src/index.ts",
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js',
+      path: path.resolve(__dirname, "dist"),
+      filename: "index.js",
     },
-    plugins: [new webpack.ProgressPlugin(), new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true })],
+    plugins: [
+      new webpack.ProgressPlugin(),
+      new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true }),
+    ],
 
-    devtool: debug ? 'inline-cheap-source-map' : false,
-    target: 'node',
+    devtool: debug ? "inline-cheap-source-map" : false,
+    target: "node",
 
     module: {
-        rules: [{
-            test: /\.(ts|tsx)$/,
-            loader: 'ts-loader',
-            include: [path.resolve(__dirname, 'src')],
-            exclude: [/node_modules/],
-        }],
-    },
-
-    optimization: {
-        minimizer: [
-            new TerserPlugin({
-                extractComments: false,
-                terserOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            })
-        ]
+      rules: [
+        {
+          test: /\.(ts|tsx)$/,
+          loader: "ts-loader",
+          include: [path.resolve(__dirname, "src")],
+          exclude: [/node_modules/],
+        },
+      ],
     },
 
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+      extensions: [".ts", ".js"],
     },
+  };
 };
